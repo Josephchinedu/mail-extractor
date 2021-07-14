@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <script type="text/javascript" src="{% static 'assets/js/script.js' %}" ></script>
+    <title>Email Extractor</title>
+</head>
+<body>
+<!-- div used to make the body blur -->
+ 
+    <section class="index-part-2">
+         <div class="container">
+
+            <div class="row">
+               <div class="text-center">
+                 <h2>Email Extractor</h2>
+               </div>
+               <hr class="hr-mid">
+               
+           </div>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-lg-5 col-sm-5 col-md-5 col-block">
+                  <form id="email-input">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Texts</label>
+                      <textarea id="email-text" placeholder="paste here" style="border-radius: 0; height: 300px;border: 1p solid #000;"></textarea>
+                      
+                    </div>
+                    <!-- <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div> -->
+                    <!-- <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <button type="submit" class="btn btn-primary">Extract</button>
+                  </form>
+                </div>
+                <div class="col-xs-12 col-lg-2 col-sm-2 col-md-2 col-block"></div>
+                <div class="col-xs-12 col-lg-5 col-sm-5 col-md-5 col-block">
+                    <form>
+                      {% csrf_token %}
+                      <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Output</label>
+                        <textarea id="email-output" placeholder="Output" style="border-radius: 0; height: 300px;border: 0;" ></textarea>
+                        
+                      </div>
+                    </form>
+                </div>
+            </div>
+
+            
+    </section>
+
+   
+
+    <section class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+            <div class="footer-p1">
+                    
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            
+          </div>
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+            <div class="footer-p2" >
+                     <p class="font-2">Made with  <i class="fa fa-heart" aria-hidden="true" ></i> by <a href="http://github.com/josephchinedu" target="_blank">Joseph</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+      let form = document.getElementById('email-input'); // selecting the form
+      
+      form.addEventListener('submit', function(event) { // 1
+          event.preventDefault()
+          
+          let data = new FormData(); // 2
+          
+          data.append("email-text", document.getElementById('email-text').value)
+          data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+          
+          axios.post('/extract/', data) // 4
+          .then(res => {
+            let d = res
+            console.log(res.data)
+            let mainOut = document.getElementById('email-output')
+            mainOut.append(res.data.emails)
+          }) // 5
+          .catch(errors => console.log(errors)) // 6
+      
+      })
+      
+    </script>
+ 
+</body>
+</html>
+
+
