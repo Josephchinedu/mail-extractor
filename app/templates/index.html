@@ -39,6 +39,7 @@
                       <label for="exampleInputEmail1" class="form-label">Texts</label>
                       <textarea id="email-text" placeholder="paste here" style="border-radius: 0; height: 300px;border: 1p solid #000;"></textarea>
                       
+                      
                     </div>
                     <!-- <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -48,17 +49,79 @@
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
                       <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div> -->
-                    <button type="submit" class="btn btn-primary">Extract</button>
+                    <style>
+                      select{
+                        border: 0;
+                        width: 100px;
+                        border-radius: 0;
+                        color: #fff;
+                        background: #000;
+                        height: 45px;
+                      }
+                    </style>
+                    <p>Output option</p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <b>seperator: </b> <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                          <option selected>select</option>
+                          <option value="1">comma</option>
+                          <option value="2">pipe</option>
+                          <option value="3">colon</option>
+                          <option value="4">new line</option>
+                        </select><br />
+                      </div>
+                      <div class="col-md-6" style="display:inline-block">
+                        Sort Alphabetically: <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      </div><br />
+                      
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label" for="flexCheckChecked">
+                        lowercase
+                      </label>
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked style="position: relative; top: -20px; right: 150px;">
+                      
+                    </div>
+                    
+                    <h4>filter option</h4>
+                    <style>
+                      #filter-option{
+                        border-radius: 0;
+                        width: 180px;
+                      }
+                    </style>
+
+                    <select class="form-select form-select-sm" >
+                      <option selected>select</option>
+                      <option value="1">Only</option>
+                      <option value="2">Do not</option>
+                    </select> <input id="filter-option" type="text" /><br />
+                    <button type="submit" class="btn btn-primary">Extract</button> <button type="reset" class="btn btn-danger">Reset</button>
                   </form>
                 </div>
+
+
+
+
+
+
+
                 <div class="col-xs-12 col-lg-2 col-sm-2 col-md-2 col-block"></div>
                 <div class="col-xs-12 col-lg-5 col-sm-5 col-md-5 col-block">
                     <form>
                       {% csrf_token %}
                       <div class="mb-3">
+                        <style>
+                          #input-counter{
+                            border: 0;
+                            border-radius: 0;
+                            width: 100px;
+                           
+                          }
+                        </style>
                         <label for="exampleInputEmail1" class="form-label">Output</label>
                         <textarea id="email-output" placeholder="Output" style="border-radius: 0; height: 300px;border: 0;" ></textarea>
-                        
+                        <input id="input-counter" placeholder="counter" />
                       </div>
                     </form>
                 </div>
@@ -66,6 +129,12 @@
 
             
     </section>
+
+    <div class="row">
+      <div class="text-center">
+        <h2 id="mobile"></h2>
+      </div>
+    </div>
 
    
 
@@ -92,6 +161,7 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
       let form = document.getElementById('email-input'); // selecting the form
       
@@ -113,6 +183,25 @@
           .catch(errors => console.log(errors)) // 6
       
       })
+
+      
+      var mobileElement = document.getElementById('mobile');
+    
+      var mobile = (/iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));  
+      if (mobile) { 
+        $('.index-part-2').css('display', 'none');
+        mobileElement.innerHTML = "Use on a laptop, mobile view coming soon 🙏";
+        
+      } 
+      else 
+      { 
+        // alert("NOT A MOBILE DEVICE!!");
+        
+      } 
+      
+
+
+      
       
     </script>
  

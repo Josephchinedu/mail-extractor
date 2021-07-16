@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse 
 from .forms import *
-from django.core import serializers
+from .scripts import *
 
 # Create your views here.
 def homepageview(request):
@@ -12,6 +12,7 @@ def homepageview(request):
 def email_extractor_view(request):
     if request.method == "POST":
         textare = request.POST.get('email-text')
-        print(textare)
+        output_data = main(textare)
+        print(output_data)
         
-    return JsonResponse ({"emails": "Django developer"}, safe=False)
+    return JsonResponse ({"emails": output_data}, safe=False)
