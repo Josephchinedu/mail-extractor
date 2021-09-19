@@ -156,24 +156,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-      let form = document.getElementById('email-input'); // selecting the form
+      let form = document.getElementById('email-input');
       
-      form.addEventListener('submit', function(event) { // 1
+      form.addEventListener('submit', function(event) {
           event.preventDefault()
           
-          let data = new FormData(); // 2
+          let data = new FormData(); 
           
           data.append("email-text", document.getElementById('email-text').value)
-          data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+          data.append("csrfmiddlewaretoken", '{{csrf_token}}')
           
-          axios.post('/extract/', data) // 4
+          axios.post('/extract/', data) 
           .then(res => {
             let d = res
             console.log(res.data)
             let mainOut = document.getElementById('email-output')
             mainOut.append(res.data.emails)
-          }) // 5
-          .catch(errors => console.log(errors)) // 6
+          }) 
+          .catch(errors => console.log(errors))
       
       })
 

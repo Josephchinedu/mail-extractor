@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-38v^hg059berj-5q3uvj^_g4g$3fbm+=z=vt%pq@z8zw!owp4v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'https://mails-extractor.herokuapp.com/', 'mails-extractor.herokuapp.com']
+ALLOWED_HOSTS = ['*', 'https://extractor-lite.herokuapp.com/', 'extractor-lite.herokuapp.com']
 
 
 # Application definition
